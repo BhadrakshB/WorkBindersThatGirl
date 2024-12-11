@@ -1,6 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:working_demo/models/color_option.dart';
+import 'package:working_demo/models/size_option.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
+  final String productTitle;
+  final String productDescription;
+  final String productCurrPrice;
+  final String productOrigPrice;
+  final String productDiscount;
+  final List<ColorOption> colorOptions;
+  final List<SizeOption> sizeOptions;
+
+  ProductDetails({
+    required this.productTitle,
+    required this.productDescription,
+    required this.productCurrPrice,
+    required this.productOrigPrice,
+    required this.productDiscount,
+    required this.colorOptions,
+    required this.sizeOptions,
+  });
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  var selectedColor = 0;
+
+  var selectedSize = 0;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -9,28 +38,50 @@ class ProductDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Printed Slip Dress',
+            widget.productTitle,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('₹1434', style: TextStyle(fontSize: 20, color: Colors.pink, fontWeight: FontWeight.bold,),),
-              SizedBox(width: 8,),
-              Text('₹2300', style: TextStyle(fontSize: 14, color: Colors.grey, decoration: TextDecoration.lineThrough),),
-              SizedBox(width: 8,),
+              Text(
+                widget.productCurrPrice,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.pink,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                widget.productOrigPrice,
+                style: TextStyle(
+                    fontSize: 14, color: Colors.grey, decoration: TextDecoration.lineThrough),
+              ),
+              SizedBox(
+                width: 8,
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                 decoration: BoxDecoration(
                   color: Colors.pink,
                 ),
-                child: Text('-38%', style: TextStyle(fontSize: 12, color: Colors.white),),
+                child: Text(
+                  "-${widget.productDiscount}",
+                  style: TextStyle(fontSize: 12, color: Colors.white),
+                ),
               )
             ],
           ),
-          Text('Inclusive of all taxes', style: TextStyle(color: Colors.grey),),
+          Text(
+            'Inclusive of all taxes',
+            style: TextStyle(color: Colors.grey),
+          ),
           SizedBox(height: 10),
-          Text('Short slip dress with printed details.Short slip dress with printed details.Short slip dress with printed details.Short slip dress with printed details.',
+          Text(
+            widget.productDescription,
             style: TextStyle(color: Colors.black87),
           ),
           SizedBox(height: 20),
@@ -41,17 +92,40 @@ class ProductDetails extends StatelessWidget {
 
           SizedBox(height: 20),
           // Color Options
-          Text('COLOR: {{Color Name}}'),
+          Text('COLOR: ${widget.colorOptions[selectedColor].colorName}'),
           SizedBox(height: 10),
           SizedBox(
             height: 40,
-            child: ListView(
+            child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              children: [
-                CircleAvatar(backgroundColor: Colors.pink, radius: 20, child: Icon(Icons.check, color: Colors.white, size: 18),),
-                SizedBox(width: 10),
-                CircleAvatar(backgroundColor: Colors.black, radius: 20),
-              ],
+              itemCount: widget.colorOptions.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      print('Color selected: ${widget.colorOptions[index].colorName}');
+                      setState(() {
+                        selectedColor = index;
+                      });
+                    },
+                    child: Container(
+                      child: selectedColor == index
+                          ? Icon(
+                              Icons.check,
+                              color: Colors.white,
+                            )
+                          : null,
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: widget.colorOptions[index].getColor(),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(height: 20),
@@ -60,35 +134,59 @@ class ProductDetails extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('SIZE: {{SIZE NAME}}'),
-              Text('Size Guide', style: TextStyle(color: Colors.pink, decorationStyle: TextDecorationStyle.solid, decoration: TextDecoration.underline, decorationColor: Colors.pink),),
-
+              Text('SIZE: ${widget.sizeOptions[selectedSize].sizeName}'),
+              Text(
+                'Size Guide',
+                style: TextStyle(
+                    color: Colors.pink,
+                    decorationStyle: TextDecorationStyle.solid,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.pink),
+              ),
             ],
           ),
           SizedBox(height: 10),
           SizedBox(
-
             height: 50,
-            child: ListView(
+            child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              children: [
-                ...['XS', 'S', 'M', 'L', 'XL'].map((size) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                      child: Text(size),
-                      style: ElevatedButton.styleFrom(
-              elevation: 0, backgroundColor: Colors.transparent,
-                        shape: const RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.grey),
-
+              itemCount: widget.sizeOptions.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      print('Size selected: ${widget.sizeOptions[index].sizeCode}');
+                      setState(() {
+                        if (!widget.sizeOptions[index].available) {
+                          return;
+                        }
+                        selectedSize = index;
+                      });
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: widget.sizeOptions[index].available ? Colors.transparent : Colors.grey[400],
+                        border: Border.all(
+                          color: selectedSize == index ? Colors.black : Colors.grey,
+                          width: widget.sizeOptions[index].available ? 1.5 : 0,
                         ),
                       ),
-                      onPressed: () {},
+                      child: Center(
+                        child: Text(
+                          widget.sizeOptions[index].sizeCode,
+                          style: TextStyle(
+                            color: widget.sizeOptions[index].available ? Colors.black : Colors.grey[700],
+                            fontWeight: selectedSize == index ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      ),
                     ),
-                  );
-                }).toList(),
-              ],
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(height: 20),

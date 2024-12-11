@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class DeliveryDetailsWidget extends StatelessWidget {
-  const DeliveryDetailsWidget({Key? key}) : super(key: key);
+  final String  aboutProduct;
+  final String  washCareInstructions;
+  final String  servicePolicy;
+
+
+
+  const DeliveryDetailsWidget({Key? key, required this.aboutProduct, required this.washCareInstructions, required this.servicePolicy}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -113,19 +119,23 @@ textInputAction: TextInputAction.done,
 
           // Expandable Sections
           const Divider(),
-          _buildExpandableTile('About the Product'),
+          _buildExpandableTile('About the Product', aboutProduct),
           const Divider(),
-          _buildExpandableTile('Wash Care Instructions'),
+          _buildExpandableTile('Wash Care Instructions',  washCareInstructions),
           const Divider(),
-          _buildExpandableTile('Service & Policy'),
+          _buildExpandableTile('Service & Policy', servicePolicy),
         ],
       ),
     );
   }
 
   // Helper Widget for Expandable Tiles
-  Widget _buildExpandableTile(String title) {
+  Widget _buildExpandableTile(String title, String details) {
     return ExpansionTile(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+        side: BorderSide(color: Colors.transparent),
+      ),
       backgroundColor: Colors.transparent,
       title: Text(
         title,
@@ -135,7 +145,7 @@ textInputAction: TextInputAction.done,
         Padding(
           padding: const EdgeInsets.all(12.0),
           child: Text(
-            'Details about $title.',
+            details,
             style: TextStyle(fontSize: 14, color: Colors.grey[600]),
           ),
         ),

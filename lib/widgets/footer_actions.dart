@@ -8,10 +8,22 @@ class FooterActions extends StatelessWidget {
       color: Colors.white,
       child: Row(
         children: [
+          IconButton(
+            visualDensity: VisualDensity.compact,
+            style: ButtonStyle(
+              padding: WidgetStateProperty.all(EdgeInsets.all(0).copyWith(right:10)),
+            ),
+            onPressed: () {},
+            icon: Icon(Icons.favorite_border, size: 30,),
+          ),
+          SizedBox(width: 10),
           Expanded(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pink,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                backgroundColor: Colors.black,
                 padding: EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: () {},
@@ -22,11 +34,15 @@ class FooterActions extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                backgroundColor: Colors.white,
                 padding: EdgeInsets.symmetric(vertical: 16),
+                side: BorderSide(color: Colors.black, width: 1),
               ),
               onPressed: () {},
-              child: Text('BUY NOW', style: TextStyle(color: Colors.white)),
+              child: Text('BUY NOW', style: TextStyle(color: Colors.black)),
             ),
           ),
         ],

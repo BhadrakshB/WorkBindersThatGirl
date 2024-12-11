@@ -12,11 +12,11 @@ class GridIndicatorWidget extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: indicators.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // Two items per row
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        childAspectRatio: 1,
+        mainAxisSpacing: 15,
+        crossAxisSpacing: 0,
+        childAspectRatio: 1.5,
       ),
       itemBuilder: (context, index) {
         final indicator = indicators[index];
@@ -25,10 +25,11 @@ class GridIndicatorWidget extends StatelessWidget {
           children: [
             // Circular Indicator
             CustomCircularIndicator(
+
               value: indicator.value,
-              icon: indicator.icon,
+              widget: indicator.widget,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
 
             // Title
             Text(
@@ -58,40 +59,46 @@ class GridIndicatorWidget extends StatelessWidget {
 
 class CustomCircularIndicator extends StatelessWidget {
   final double value; // The progress value (e.g., 75 means 75%).
-  final IconData icon;
+  final Widget widget;
+  final double size;
 
   const CustomCircularIndicator({
     Key? key,
     required this.value,
-    required this.icon,
+    required this.widget,
+    this.size = 60,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 80,
-      height: 80,
+      width: size,
+      height: size,
       child: Stack(
         alignment: Alignment.center,
         children: [
           // Grey background circle
-          CircularProgressIndicator(
-            value: 1.0,
-            strokeWidth: 8,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[300]!),
+          SizedBox(
+            height:size,
+            width: size,
+            child: CircularProgressIndicator(
+              value: 1.0,
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[300]!),
+            ),
           ),
           // Pink progress circle
-          CircularProgressIndicator(
-            value: value / 100,
-            strokeWidth: 8,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+          SizedBox(
+            height:size,
+            width: size,
+            child: CircularProgressIndicator(
+              value: value,
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+            ),
           ),
-          // Icon in the center
-          Icon(
-            icon,
-            size: 28,
-            color: Colors.black,
-          ),
+          // Widget in the center
+          widget
         ],
       ),
     );
@@ -102,12 +109,12 @@ class IndicatorData {
   final double value;
   final String title;
   final String subtitle;
-  final IconData icon;
+  final Widget widget;
 
   IndicatorData({
     required this.value,
     required this.title,
     required this.subtitle,
-    required this.icon,
+    required this.widget,
   });
 }
