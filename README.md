@@ -1,6 +1,12 @@
 # That Girl - Product Page UI  
 
-This repository contains the Flutter implementation of a **Product Details Page UI**, designed as part of an internship selection task. It is a simple, responsive, and aesthetically pleasing user interface for a mobile e-commerce app, showcasing a single product's details, images, reviews, and related items.  
+This repository contains the Flutter implementation of a **Product Details Page UI**, designed as part of an internship selection task. It is a simple, responsive, and aesthetically pleasing user interface for a mobile e-commerce app, showcasing a single product's details, images, reviews, and related items. 
+
+
+
+https://github.com/user-attachments/assets/930604ee-53a0-42f5-bf3f-c7cbcddef87b
+
+
 
 ---
 
