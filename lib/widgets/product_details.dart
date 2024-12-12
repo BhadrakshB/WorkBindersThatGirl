@@ -145,7 +145,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SizedBox(
             height: 50,
             child: ListView.builder(
@@ -156,7 +156,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: GestureDetector(
                     onTap: () {
-                      print('Size selected: ${widget.sizeOptions[index].sizeCode}');
                       setState(() {
                         if (!widget.sizeOptions[index].available) {
                           return;
@@ -168,7 +167,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                       width: 50,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: widget.sizeOptions[index].available ? Colors.transparent : Colors.grey[400],
+                        color: widget.sizeOptions[index].available
+                            ? Colors.transparent
+                            : Colors.grey[400],
                         border: Border.all(
                           color: selectedSize == index ? Colors.black : Colors.grey,
                           width: widget.sizeOptions[index].available ? 1.5 : 0,
@@ -178,7 +179,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                         child: Text(
                           widget.sizeOptions[index].sizeCode,
                           style: TextStyle(
-                            color: widget.sizeOptions[index].available ? Colors.black : Colors.grey[700],
+                            color: widget.sizeOptions[index].available
+                                ? Colors.black
+                                : Colors.grey[700],
                             fontWeight: selectedSize == index ? FontWeight.bold : FontWeight.normal,
                           ),
                         ),
@@ -189,7 +192,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               },
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Divider(
             color: Colors.grey[500],
             thickness: 1,

@@ -4,13 +4,13 @@ import 'dart:math';
 class GridIndicatorWidget extends StatelessWidget {
   final List<IndicatorData> indicators;
 
-  const GridIndicatorWidget({Key? key, required this.indicators}) : super(key: key);
+  const GridIndicatorWidget({super.key, required this.indicators});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: indicators.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // Two items per row
@@ -25,7 +25,6 @@ class GridIndicatorWidget extends StatelessWidget {
           children: [
             // Circular Indicator
             CustomCircularIndicator(
-
               value: indicator.value,
               widget: indicator.widget,
             ),
@@ -34,7 +33,7 @@ class GridIndicatorWidget extends StatelessWidget {
             // Title
             Text(
               indicator.title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
@@ -63,11 +62,11 @@ class CustomCircularIndicator extends StatelessWidget {
   final double size;
 
   const CustomCircularIndicator({
-    Key? key,
+    super.key,
     required this.value,
     required this.widget,
     this.size = 60,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +78,7 @@ class CustomCircularIndicator extends StatelessWidget {
         children: [
           // Grey background circle
           SizedBox(
-            height:size,
+            height: size,
             width: size,
             child: CircularProgressIndicator(
               value: 1.0,
@@ -89,12 +88,12 @@ class CustomCircularIndicator extends StatelessWidget {
           ),
           // Pink progress circle
           SizedBox(
-            height:size,
+            height: size,
             width: size,
             child: CircularProgressIndicator(
               value: value,
               strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.pink),
             ),
           ),
           // Widget in the center

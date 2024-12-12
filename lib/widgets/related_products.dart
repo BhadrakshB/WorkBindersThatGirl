@@ -6,11 +6,10 @@ import '../models/related_product.dart';
 class RelatedProducts extends StatelessWidget {
   final List<RelatedProduct> products;
 
-
   const RelatedProducts({
-    Key? key,
+    super.key,
     required this.products,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class RelatedProducts extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Section Title
-          Padding(
+          const Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               "You Might Also Like",
@@ -31,7 +30,7 @@ class RelatedProducts extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Divider(
+          const Divider(
             color: Colors.pink,
             thickness: 1,
           ),
@@ -40,7 +39,8 @@ class RelatedProducts extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: GridView.builder(
-              shrinkWrap: true, // Ensures the grid fits within its parent scroll view
+              shrinkWrap: true,
+              // Ensures the grid fits within its parent scroll view
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // 2 items per row
@@ -53,7 +53,7 @@ class RelatedProducts extends StatelessWidget {
                 final RelatedProduct product = products[index];
                 return ProductCard(
                   image: product.image,
-                  price:product.currPrice,
+                  price: product.currPrice,
                   title: product.title,
                 );
               },
@@ -71,11 +71,11 @@ class ProductCard extends StatelessWidget {
   final String title;
 
   const ProductCard({
-    Key? key,
+    super.key,
     required this.image,
     required this.price,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,27 +87,27 @@ class ProductCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(0),
-              child: isNetworkImage(image) ? Image.network(
-                image,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ) : Image.asset(
-                image,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+              child: isNetworkImage(image)
+                  ? Image.network(
+                      image,
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      image,
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
             ),
-            Positioned(
+            const Positioned(
               top: 8,
               right: 8,
               child: Icon(
                 Icons.favorite_border_rounded,
                 color: Colors.white,
                 fill: 1,
-
-
               ),
             ),
           ],

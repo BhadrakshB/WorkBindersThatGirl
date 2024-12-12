@@ -14,13 +14,14 @@ class RatingsReviews extends StatelessWidget {
   final List<String> reviewImages;
   final List<CustomerReview> reviews;
 
-  RatingsReviews({
-    this.rating = 4.5,
-    this.totalReviews = 237,
-    this.sizing = 4.1,
-    this.quality = 4.5,
-    this.fit = 4.1,
-    this.wouldRecommend = 0.87,
+  const RatingsReviews({
+    super.key,
+    required this.rating,
+    required this.totalReviews,
+    required this.sizing,
+    required this.quality,
+    required this.fit,
+    required this.wouldRecommend,
     required this.reviewImages,
     required this.reviews,
   });
@@ -32,7 +33,7 @@ class RatingsReviews extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -52,7 +53,7 @@ class RatingsReviews extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -66,17 +67,17 @@ class RatingsReviews extends StatelessWidget {
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 ratingWidget: RatingWidget(
-                  full: Icon(
+                  full: const Icon(
                     Icons.star,
                     color: Colors.pink,
                   ),
-                  half: Icon(
+                  half: const Icon(
                     Icons.star_half,
                     color: Colors.pink,
                   ),
-                  empty: Icon(
+                  empty: const Icon(
                     Icons.star_border,
                     color: Colors.pink,
                   ),
@@ -96,23 +97,24 @@ class RatingsReviews extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 30),
-          Divider(),
-          SizedBox(height: 20),
+          const SizedBox(height: 30),
+          const Divider(),
+          const SizedBox(height: 20),
           GridIndicatorWidget(
             indicators: [
               IndicatorData(
                   title: 'Sizing',
                   subtitle: 'True to Size',
                   value: sizing,
-                  widget: Icon(Icons.arrow_back_outlined)),
+                  widget: const Icon(Icons.arrow_back_outlined)),
               IndicatorData(
                 title: 'Quality',
                 subtitle: 'Out of 5',
                 value: quality,
                 widget: Text(
                   "${quality * 5}",
-                  style: TextStyle(fontSize: 18, color: Colors.pink, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, color: Colors.pink, fontWeight: FontWeight.bold),
                 ),
               ),
               IndicatorData(
@@ -121,7 +123,8 @@ class RatingsReviews extends StatelessWidget {
                 value: fit,
                 widget: Text(
                   "${fit * 5}",
-                  style: TextStyle(fontSize: 18, color: Colors.pink, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, color: Colors.pink, fontWeight: FontWeight.bold),
                 ),
               ),
               IndicatorData(
@@ -130,14 +133,15 @@ class RatingsReviews extends StatelessWidget {
                 value: 0.87,
                 widget: Text(
                   "${(wouldRecommend * 100).round()}",
-                  style: TextStyle(fontSize: 18, color: Colors.pink, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, color: Colors.pink, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10),
-          Divider(),
-          SizedBox(height: 20),
+          const SizedBox(height: 10),
+          const Divider(),
+          const SizedBox(height: 20),
           Row(
             children: [
               Text(
@@ -149,7 +153,7 @@ class RatingsReviews extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -178,14 +182,14 @@ class RatingsReviews extends StatelessWidget {
 
           // Reviews
 
-          Divider(),
-          SizedBox(height: 20),
+          const Divider(),
+          const SizedBox(height: 20),
 
           Row(
             children: [
               Text(
                 'Customer Reviews (${reviews.length})',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -232,8 +236,8 @@ class RatingsReviews extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 20),
-          Divider(),
+          const SizedBox(height: 20),
+          const Divider(),
         ],
       ),
     );

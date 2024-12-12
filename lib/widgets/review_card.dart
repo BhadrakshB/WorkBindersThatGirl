@@ -14,7 +14,7 @@ class ReviewCard extends StatefulWidget {
   final bool isVerified;
 
   const ReviewCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     this.images,
@@ -23,7 +23,7 @@ class ReviewCard extends StatefulWidget {
     required this.rating,
     required this.helpfulCount,
     required this.isVerified,
-  }) : super(key: key);
+  });
 
   @override
   State<ReviewCard> createState() => _ReviewCardState();
@@ -129,52 +129,38 @@ class _ReviewCardState extends State<ReviewCard> {
                 ),
               ),
             const SizedBox(height: 12),
-
+            Text(
+              widget.reviewerName,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             // Reviewer Details
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
+                    const Icon(Icons.verified, color: Colors.blue, size: 16),
+                    const SizedBox(width: 4),
                     Text(
-                      widget.reviewerName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      "Verified Buyer, ${widget.reviewDate}",
+                      style: const TextStyle(color: Colors.grey, fontSize: 11),
                     ),
-                    Row(
-                      children: [
-                        const Icon(Icons.verified, color: Colors.blue, size: 16),
-                        const SizedBox(width: 4),
-                        Text(
-                          "Verified Buyer, ${widget.reviewDate}",
-                          style: const TextStyle(color: Colors.grey, fontSize: 11),
-                        ),
-                      ],
-                    )
                   ],
                 ),
-                Spacer(),
-                Text(
+                const Spacer(),
+                const Text(
                   "Helpful ?",
                   style: const TextStyle(color: Colors.grey, fontSize: 11),
                 ),
-                IconButton(
-
-                  onPressed: () {},
-                  visualDensity: VisualDensity.compact,
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.thumb_up_alt_outlined, size: 16, ),
-                ),
+                const SizedBox(width: 8),
+                const Icon(Icons.thumb_up_alt_outlined, size: 16, ),
+                const SizedBox(width: 4),
                 Text(
                   widget.helpfulCount.toString(),
                   style: const TextStyle(color: Colors.grey, fontSize: 11),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  visualDensity: VisualDensity.compact,
-
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.more_vert),
-                ),
+                const SizedBox(width: 8),
+                const Icon(Icons.more_vert, size: 20,),
               ],
             ),
           ],

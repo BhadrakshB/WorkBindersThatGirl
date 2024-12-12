@@ -9,7 +9,8 @@ class ProductImageCarousel extends StatefulWidget {
   final int productTotalRatings;
   final double productAvgRating;
 
-  ProductImageCarousel({
+  const ProductImageCarousel({
+    super.key,
     required this.images,
     required this.productTotalRatings,
     required this.productAvgRating,
@@ -35,7 +36,6 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
                   onPageChanged: (index, reason) {
                     setState(() {
                       currentImageIndex = index;
-                      print(" currentImageIndex: $currentImageIndex");
                     });
                   },
                   viewportFraction: 1),
@@ -46,7 +46,7 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
                       onTap: () => showImagePreview(context, image),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(10),
@@ -88,7 +88,7 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Icon(
+                    const Icon(
                       Icons.star,
                       color: Colors.pink,
                       size: 16,
@@ -107,7 +107,7 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
             ),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         SizedBox(
           height: 14,
           child: Row(
@@ -115,10 +115,10 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
             children: widget.images.map((image) {
               int index = widget.images.indexOf(image);
               return AnimatedContainer(
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 width: currentImageIndex == index ? 12 : 8.0,
                 height: currentImageIndex == index ? 12 : 8.0,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: currentImageIndex == index ? Colors.pink : Colors.grey,

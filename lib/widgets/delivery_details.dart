@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class DeliveryDetailsWidget extends StatelessWidget {
-  final String  aboutProduct;
-  final String  washCareInstructions;
-  final String  servicePolicy;
+  final String aboutProduct;
+  final String washCareInstructions;
+  final String servicePolicy;
 
-
-
-  const DeliveryDetailsWidget({Key? key, required this.aboutProduct, required this.washCareInstructions, required this.servicePolicy}) : super(key: key);
+  const DeliveryDetailsWidget(
+      {super.key,
+      required this.aboutProduct,
+      required this.washCareInstructions,
+      required this.servicePolicy});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +19,13 @@ class DeliveryDetailsWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ZIP Code Input
-          Row(
+          const Row(
             children: [
-              const Text(
+              Text(
                 'DELIVER TO: ',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              const Text(
+              Text(
                 'Mumbai',
                 style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey),
               ),
@@ -40,10 +42,9 @@ class DeliveryDetailsWidget extends StatelessWidget {
                     borderRadius: BorderRadius.zero, // No rounded corners
                   ),
                   child: TextField(
-textInputAction: TextInputAction.done,
+                    textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.number,
                     maxLength: 6,
-
                     decoration: InputDecoration(
                       counter: const Offstage(),
                       suffixIcon: Container(
@@ -95,23 +96,25 @@ textInputAction: TextInputAction.done,
               Expanded(
                 child: RichText(
                   text: TextSpan(
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600], height: 1.5), // Default style
-                    children: [
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600], height: 1.5),
+                    // Default style
+                    children: const [
                       TextSpan(
                         text: 'Standard Delivery: \n',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), // Bold black text
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black), // Bold black text
                       ),
                       TextSpan(
                         text: 'Free Shipping on this product. Save ₹99\nEstimated Delivery by ',
                       ),
                       TextSpan(
                         text: 'Tue, 26 Mar - Thu 28 Mar',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), // Bold black text
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black), // Bold black text
                       ),
                     ],
                   ),
                 ),
-
               ),
             ],
           ),
@@ -121,7 +124,7 @@ textInputAction: TextInputAction.done,
           const Divider(),
           _buildExpandableTile('About the Product', aboutProduct),
           const Divider(),
-          _buildExpandableTile('Wash Care Instructions',  washCareInstructions),
+          _buildExpandableTile('Wash Care Instructions', washCareInstructions),
           const Divider(),
           _buildExpandableTile('Service & Policy', servicePolicy),
         ],
